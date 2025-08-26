@@ -1,1 +1,18 @@
+name: SSH-Debug
 
+on:
+  workflow_dispatch:   # 手动触发
+
+jobs:
+  ssh-job:
+    runs-on: ubuntu-22.04   # 指定系统 Ubuntu
+
+    steps:
+    - name: Checkout Repo
+      uses: actions/checkout@v3
+
+    - name: Setup tmate session
+      uses: mxschmitt/action-tmate@v3
+      with:
+        limit-access-to-actor: true   # 只允许你自己的 GitHub 账号连进来
+      timeout-minutes: 30              # 30分钟后自动断开
